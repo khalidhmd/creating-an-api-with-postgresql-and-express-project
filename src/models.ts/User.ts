@@ -70,11 +70,11 @@ export class UserModel {
 
       const result = await conn.query(sql, [email]);
 
-      const book = result.rows[0];
+      const user = result.rows[0];
 
       conn.release();
 
-      return book;
+      return user;
     } catch (err) {
       throw new Error(`Could not delete user ${email}. Error: ${err}`);
     }

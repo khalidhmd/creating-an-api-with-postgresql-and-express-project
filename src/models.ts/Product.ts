@@ -7,7 +7,7 @@ export type productType = {
   category: string;
 };
 
-export class UserModel {
+export class ProductModel {
   async index(): Promise<productType[]> {
     try {
       const conn = await db.connect();
