@@ -1,1 +1,1 @@
-CREATE TABLE order_products (id SERIAL PRIMARY KEY, order_id INTEGER, product_id INTEGER, quantity INTEGER);
+CREATE TABLE IF NOT EXISTS order_products (id SERIAL PRIMARY KEY, order_id INTEGER, product_id INTEGER, quantity INTEGER);
