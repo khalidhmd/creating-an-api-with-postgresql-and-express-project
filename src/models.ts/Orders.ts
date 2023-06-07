@@ -1,17 +1,22 @@
-import db from "../db";
+import { Pool } from "pg";
+// import db from "../db";
 
 export type orderType = {
-  id: number;
   order_date: Date;
   user_id: number;
   status: boolean;
 };
 
 export class OrderModel {
+  db: Pool;
+ 
+  constructor(db: Pool) {
+    this.db = db;
+  }
   async index(): Promise<orderType[]> {
     try {
-      const conn = await db.connect();
-      const sql = "SELECT * FROM orders";
+      const conn = await this.db.connect();
+      const sql = "SELECT * FROM orders;";
 
       const result = await conn.query(sql);
 
@@ -25,9 +30,9 @@ export class OrderModel {
 
   async show(id: number): Promise<orderType> {
     try {
-      const sql = "SELECT * FROM orders WHERE id=($1)";
+      const sql = "SELECT * FROM orders WHERE id=($1);";
 
-      const conn = await db.connect();
+      const conn = await this.db.connect();
 
       const result = await conn.query(sql, [id]);
 
@@ -42,8 +47,8 @@ export class OrderModel {
   async create(o: orderType): Promise<orderType> {
     try {
       const sql =
-        "INSERT INTO orders (order_date, user_id, status) VALUES($1, $2, $3) RETURNING *";
-      const conn = await db.connect();
+        "INSERT INTO orders (order_date, user_id, status) VALUES($1, $2, $3) RETURNING *;";
+      const conn = await this.db.connect();
 
       const result = await conn.query(sql, [o.order_date, o.user_id, o.status]);
 
@@ -61,8 +66,8 @@ export class OrderModel {
 
   async delete(id: number): Promise<orderType> {
     try {
-      const sql = "DELETE FROM orders WHERE id=($1)";
-      const conn = await db.connect();
+      const sql = "DELETE FROM orders WHERE id=($1);";
+      const conn = await this.db.connect();
 
       const result = await conn.query(sql, [id]);
 

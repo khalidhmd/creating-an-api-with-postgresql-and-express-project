@@ -1,7 +1,6 @@
-import db from "../db";
 
+import { Pool } from "pg";
 export type userType = {
-  id: number;
   first_name: string;
   last_name: string;
   password: string;
@@ -9,10 +8,16 @@ export type userType = {
 };
 
 export class UserModel {
+
+  db: Pool;
+ 
+  constructor(db: Pool) {
+    this.db = db;
+  }
   async index(): Promise<userType[]> {
     try {
-      const conn = await db.connect();
-      const sql = "SELECT * FROM users";
+      const conn = await this.db.connect();
+      const sql = "SELECT * FROM users;";
 
       const result = await conn.query(sql);
 
@@ -26,9 +31,9 @@ export class UserModel {
 
   async show(email: string): Promise<userType> {
     try {
-      const sql = "SELECT * FROM users WHERE email=($1)";
+      const sql = "SELECT * FROM users WHERE email=($1);";
 
-      const conn = await db.connect();
+      const conn = await this.db.connect();
 
       const result = await conn.query(sql, [email]);
 
@@ -43,8 +48,8 @@ export class UserModel {
   async create(u: userType): Promise<userType> {
     try {
       const sql =
-        "INSERT INTO users (first_name, last_name, password, email) VALUES($1, $2, $3, $4) RETURNING *";
-      const conn = await db.connect();
+        "INSERT INTO users (first_name, last_name, password, email) VALUES($1, $2, $3, $4) RETURNING *;";
+      const conn = await this.db.connect();
 
       const result = await conn.query(sql, [
         u.first_name,
@@ -65,8 +70,8 @@ export class UserModel {
 
   async delete(email: string): Promise<userType> {
     try {
-      const sql = "DELETE FROM users WHERE email=($1)";
-      const conn = await db.connect();
+      const sql = "DELETE FROM users WHERE email=($1);";
+      const conn = await this.db.connect();
 
       const result = await conn.query(sql, [email]);
 

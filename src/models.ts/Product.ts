@@ -1,17 +1,22 @@
-import db from "../db";
+import { Pool } from "pg";
+// import db from "../db";
 
 export type productType = {
-  id: number;
   price: number;
   name: string;
   category: string;
 };
 
 export class ProductModel {
+  db: Pool;
+ 
+  constructor(db: Pool) {
+    this.db = db;
+  }
   async index(): Promise<productType[]> {
     try {
-      const conn = await db.connect();
-      const sql = "SELECT * FROM products";
+      const conn = await this.db.connect();
+      const sql = "SELECT * FROM products;";
 
       const result = await conn.query(sql);
 
@@ -25,9 +30,9 @@ export class ProductModel {
 
   async show(id: number): Promise<productType> {
     try {
-      const sql = "SELECT * FROM products WHERE id=($1)";
+      const sql = "SELECT * FROM products WHERE id=($1);";
 
-      const conn = await db.connect();
+      const conn = await this.db.connect();
 
       const result = await conn.query(sql, [id]);
 
@@ -42,10 +47,10 @@ export class ProductModel {
   async create(p: productType): Promise<productType> {
     try {
       const sql =
-        "INSERT INTO products (name, price, category) VALUES($1, $2, $3) RETURNING *";
-      const conn = await db.connect();
+        "INSERT INTO products (name, price, category) VALUES($1, $2, $3) RETURNING *;";
+      const conn = await this.db.connect();
 
-      const result = await conn.query(sql, [p.name, p.price, p.id, p.category]);
+      const result = await conn.query(sql, [p.name, p.price, p.category]);
 
       const book = result.rows[0];
 
@@ -59,8 +64,8 @@ export class ProductModel {
 
   async delete(id: number): Promise<productType> {
     try {
-      const sql = "DELETE FROM products WHERE id=($1)";
-      const conn = await db.connect();
+      const sql = "DELETE FROM products WHERE id=($1);";
+      const conn = await this.db.connect();
 
       const result = await conn.query(sql, [id]);
 
