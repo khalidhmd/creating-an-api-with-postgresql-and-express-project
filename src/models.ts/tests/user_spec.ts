@@ -1,20 +1,8 @@
 import { userType, UserModel } from "../User";
 
-import { Pool } from "pg";
-
-
-const db = new Pool({host: 'localhost',
-database: 'udaci_db_test',
-user: 'test_user',
-password: 'passwd',})
-const user = new UserModel(db);
-
-
-
+const user = new UserModel();
 
 describe("UserModel tests", () => {
- 
-  
   it("should have an index() method", () => {
     expect(user.index).toBeDefined();
   });
@@ -33,11 +21,24 @@ describe("UserModel tests", () => {
 
   it("index method should return a list of users", async () => {
     const res = await user.index();
-    
-    
+
     expect(res).toEqual([]);
   });
-
-  
-  
+  it("should add a user", async () => {
+    const result = await user.create({
+      first_name: "khalid",
+      last_name: "hasan",
+      email: "em@ail.com",
+      password: "passwd",
+    });
+    expect({ ...result, id: 1 }).toEqual({
+      first_name: "khalid",
+      last_name: "hasan",
+      email: "em@ail.com",
+      password: "passwd",
+      id: 1,
+    });
+    console.log(result);
+    user.delete("em@ail.com");
+  });
 });

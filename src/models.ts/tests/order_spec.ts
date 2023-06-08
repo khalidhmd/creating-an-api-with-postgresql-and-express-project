@@ -1,15 +1,15 @@
 import { orderType, OrderModel } from "../Orders";
 
-import { Pool } from "pg";
+// import { Pool } from "pg";
 
 
-const db = new Pool({host: 'localhost',
-database: 'udaci_db_test',
-user: 'test_user',
-password: 'passwd',})
+// const db = new Pool({host: 'localhost',
+// database: 'udaci_db_test',
+// user: 'test_user',
+// password: 'passwd',})
 
 
-const order = new OrderModel(db);
+const order = new OrderModel();
 
 
 

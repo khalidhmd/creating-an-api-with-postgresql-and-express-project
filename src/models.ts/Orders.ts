@@ -1,5 +1,5 @@
 import { Pool } from "pg";
-// import db from "../db";
+import db from "../db";
 
 export type orderType = {
   order_date: Date;
@@ -8,14 +8,12 @@ export type orderType = {
 };
 
 export class OrderModel {
-  db: Pool;
+
  
-  constructor(db: Pool) {
-    this.db = db;
-  }
+
   async index(): Promise<orderType[]> {
     try {
-      const conn = await this.db.connect();
+      const conn = await db.connect();
       const sql = "SELECT * FROM orders;";
 
       const result = await conn.query(sql);
@@ -32,7 +30,7 @@ export class OrderModel {
     try {
       const sql = "SELECT * FROM orders WHERE id=($1);";
 
-      const conn = await this.db.connect();
+      const conn = await db.connect();
 
       const result = await conn.query(sql, [id]);
 
@@ -48,7 +46,7 @@ export class OrderModel {
     try {
       const sql =
         "INSERT INTO orders (order_date, user_id, status) VALUES($1, $2, $3) RETURNING *;";
-      const conn = await this.db.connect();
+      const conn = await db.connect();
 
       const result = await conn.query(sql, [o.order_date, o.user_id, o.status]);
 
@@ -67,7 +65,7 @@ export class OrderModel {
   async delete(id: number): Promise<orderType> {
     try {
       const sql = "DELETE FROM orders WHERE id=($1);";
-      const conn = await this.db.connect();
+      const conn = await db.connect();
 
       const result = await conn.query(sql, [id]);
 

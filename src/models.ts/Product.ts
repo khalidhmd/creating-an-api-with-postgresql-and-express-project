@@ -1,5 +1,5 @@
 import { Pool } from "pg";
-// import db from "../db";
+import db from "../db";
 
 export type productType = {
   price: number;
@@ -8,14 +8,10 @@ export type productType = {
 };
 
 export class ProductModel {
-  db: Pool;
- 
-  constructor(db: Pool) {
-    this.db = db;
-  }
+  
   async index(): Promise<productType[]> {
     try {
-      const conn = await this.db.connect();
+      const conn = await db.connect();
       const sql = "SELECT * FROM products;";
 
       const result = await conn.query(sql);
@@ -32,7 +28,7 @@ export class ProductModel {
     try {
       const sql = "SELECT * FROM products WHERE id=($1);";
 
-      const conn = await this.db.connect();
+      const conn = await db.connect();
 
       const result = await conn.query(sql, [id]);
 
@@ -48,7 +44,7 @@ export class ProductModel {
     try {
       const sql =
         "INSERT INTO products (name, price, category) VALUES($1, $2, $3) RETURNING *;";
-      const conn = await this.db.connect();
+      const conn = await db.connect();
 
       const result = await conn.query(sql, [p.name, p.price, p.category]);
 
@@ -65,7 +61,7 @@ export class ProductModel {
   async delete(id: number): Promise<productType> {
     try {
       const sql = "DELETE FROM products WHERE id=($1);";
-      const conn = await this.db.connect();
+      const conn = await db.connect();
 
       const result = await conn.query(sql, [id]);
 

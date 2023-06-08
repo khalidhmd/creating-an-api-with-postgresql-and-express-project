@@ -1,13 +1,13 @@
 import { productType, ProductModel } from "../Product";
 
-import { Pool } from "pg";
+// import { Pool } from "pg";
 
 
-const db = new Pool({host: 'localhost',
-database: 'udaci_db_test',
-user: 'test_user',
-password: 'passwd',})
-const product = new ProductModel(db);
+// const db = new Pool({host: 'localhost',
+// database: 'udaci_db_test',
+// user: 'test_user',
+// password: 'passwd',})
+const product = new ProductModel();
 
 
 
