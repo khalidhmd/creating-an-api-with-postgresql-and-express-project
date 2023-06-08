@@ -38,7 +38,6 @@ describe("UserModel tests", () => {
       password: "passwd",
       id: 1,
     });
-    console.log(result);
-    user.delete("em@ail.com");
+    await user.delete("em@ail.com");
   });
 });

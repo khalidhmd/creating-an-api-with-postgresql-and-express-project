@@ -1,19 +1,8 @@
 import { productType, ProductModel } from "../Product";
 
-// import { Pool } from "pg";
-
-
-// const db = new Pool({host: 'localhost',
-// database: 'udaci_db_test',
-// user: 'test_user',
-// password: 'passwd',})
 const product = new ProductModel();
 
-
-
-
 describe("ProductModel tests", () => {
-  
   it("should have an index() method", () => {
     expect(product.index).toBeDefined();
   });
@@ -34,7 +23,19 @@ describe("ProductModel tests", () => {
     const res = await product.index();
     expect(res).toEqual([]);
   });
+  it("should add a product", async () => {
+    const result = await product.create({
+      name: "product 1",
+      price: 10,
+      category: "category 1",
+    });
+    expect({ ...result, id: 1 }).toEqual({
+      name: "product 1",
+      price: 10,
+      category: "category 1",
+      id: 1,
+    });
 
-  
-  
+    await product.delete(1);
+  });
 });

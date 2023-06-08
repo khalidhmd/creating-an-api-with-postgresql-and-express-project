@@ -12,6 +12,6 @@ app.get("/", function (req: Request, res: Response) {
   res.send("Hello World!");
 });
 
-app.listen(3000, function () {
+app.listen(process.env.PORT || 3000, function () {
   console.log(`starting app on: ${address}`);
 });
