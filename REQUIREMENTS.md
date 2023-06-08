@@ -45,15 +45,15 @@ These are the notes from a meeting with the frontend developer that describe wha
 ### orders table
 
 - id: serial primary key
-- user_id: integer
+- user_id: integer FOREIGN KEY REFERENCES users (id)
 - order_date: date
 - status: boolean
 
 ### order_products table
 
 - id: serial primary key
-- product_id: integer
-- order_id: date
+- product_id: integer FOREIGN KEY REFERENCES products (id)
+- order_id: integer FOREIGN KEY REFERENCES orders (id)
 - quantity: integer
 
 ## Data Shapes
