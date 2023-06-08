@@ -1,8 +1,27 @@
 # Storefront Backend Project
 
-## Getting Started
+## Database setup and connection
 
-This repo contains a basic Node and Express app to get you started in constructing an API. To get started, clone this repo and run `yarn` in your terminal at the project root.
+To use this project to connect to your Postgres databse server and run successfully you need to provide the following environment variable and set your system values instead of provided values:
+
+```
+POSTGRES_HOST=<Postgres server ddress>
+POSTGRES_DB=<database name>
+POSTGRES_DB_TEST=<database name for runing Jasmine tests>
+POSTGRES_USER=<database user name>
+POSTGRES_USER_TEST=<database username for testing>
+POSTGRES_PASSWORD=<password for database user>
+POSTGRES_PASSWORD_TEST=<password for testing user>
+API_PORT=<port for express api server>
+```
+
+The Postgres server will use the default port
+
+The api server port is set in the env variable PORT as above, or fail safe to 3000 as set in the server file script
+
+To install the packages run `npm install`
+
+You will need to install globally jasmine-ts and db-migrate
 
 ## Required Technologies
 

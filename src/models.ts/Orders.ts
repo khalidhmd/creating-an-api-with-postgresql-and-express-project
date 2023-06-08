@@ -2,15 +2,13 @@ import { Pool } from "pg";
 import db from "../db";
 
 export type orderType = {
+  id?: number | any;
   order_date: Date;
   user_id: number;
   status: boolean;
 };
 
 export class OrderModel {
-
- 
-
   async index(): Promise<orderType[]> {
     try {
       const conn = await db.connect();
@@ -76,6 +74,23 @@ export class OrderModel {
       return order;
     } catch (err) {
       throw new Error(`Could not delete order ${id}. Error: ${err}`);
+    }
+  }
+
+  async clear(): Promise<orderType> {
+    try {
+      const sql = "DELETE FROM orders;";
+      const conn = await db.connect();
+
+      const result = await conn.query(sql);
+
+      const order = result.rows[0];
+
+      conn.release();
+
+      return order;
+    } catch (err) {
+      throw new Error(`Could not clear order . Error: ${err}`);
     }
   }
 }

@@ -25,6 +25,37 @@ These are the notes from a meeting with the frontend developer that describe wha
 - Current Order by user (args: user id)[token required]
 - [OPTIONAL] Completed Orders by user (args: user id)[token required]
 
+## Data Schema Design
+
+### users table
+
+- id: serial primary key
+- first_name: varchar(30)
+- last_name: varchar(30)
+- email: varchar(80)
+- password: varchar(100)
+
+### products table
+
+- id: serial primary key
+- name: varchar(50)
+- category: varchar(20)
+- price: float
+
+### orders table
+
+- id: serial primary key
+- user_id: integer
+- order_date: date
+- status: boolean
+
+### order_products table
+
+- id: serial primary key
+- product_id: integer
+- order_id: date
+- quantity: integer
+
 ## Data Shapes
 
 #### Product

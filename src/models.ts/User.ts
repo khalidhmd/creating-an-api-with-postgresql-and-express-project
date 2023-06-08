@@ -1,7 +1,7 @@
-
 import { Pool } from "pg";
-import db from '../db'
+import db from "../db";
 export type userType = {
+  id?: number;
   first_name: string;
   last_name: string;
   password: string;
@@ -9,8 +9,6 @@ export type userType = {
 };
 
 export class UserModel {
-
-  
   async index(): Promise<userType[]> {
     try {
       const conn = await db.connect();
@@ -79,6 +77,23 @@ export class UserModel {
       return user;
     } catch (err) {
       throw new Error(`Could not delete user ${email}. Error: ${err}`);
+    }
+  }
+
+  async clear(): Promise<userType> {
+    try {
+      const sql = "DELETE FROM users;";
+      const conn = await db.connect();
+
+      const result = await conn.query(sql);
+
+      const user = result.rows[0];
+
+      conn.release();
+
+      return user;
+    } catch (err) {
+      throw new Error(`Could not clear user . Error: ${err}`);
     }
   }
 }

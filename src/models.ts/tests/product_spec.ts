@@ -3,6 +3,9 @@ import { productType, ProductModel } from "../Product";
 const product = new ProductModel();
 
 describe("ProductModel tests", () => {
+  beforeAll(async () => {
+    product.clear();
+  });
   it("should have an index() method", () => {
     expect(product.index).toBeDefined();
   });
@@ -29,11 +32,11 @@ describe("ProductModel tests", () => {
       price: 10,
       category: "category 1",
     });
-    expect({ ...result, id: 1 }).toEqual({
+    expect({ ...result }).toEqual({
       name: "product 1",
       price: 10,
       category: "category 1",
-      id: 1,
+      id: result.id,
     });
 
     await product.delete(1);

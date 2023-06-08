@@ -2,13 +2,13 @@ import { Pool } from "pg";
 import db from "../db";
 
 export type productType = {
+  id?: number | any;
   price: number;
   name: string;
   category: string;
 };
 
 export class ProductModel {
-  
   async index(): Promise<productType[]> {
     try {
       const conn = await db.connect();
@@ -72,6 +72,23 @@ export class ProductModel {
       return product;
     } catch (err) {
       throw new Error(`Could not delete product ${id}. Error: ${err}`);
+    }
+  }
+
+  async clear(): Promise<productType> {
+    try {
+      const sql = "DELETE FROM products";
+      const conn = await db.connect();
+
+      const result = await conn.query(sql);
+
+      const product = result.rows[0];
+
+      conn.release();
+
+      return product;
+    } catch (err) {
+      throw new Error(`Could not clear product . Error: ${err}`);
     }
   }
 }

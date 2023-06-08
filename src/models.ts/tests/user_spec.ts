@@ -3,6 +3,9 @@ import { userType, UserModel } from "../User";
 const user = new UserModel();
 
 describe("UserModel tests", () => {
+  beforeAll(async () => {
+    user.clear();
+  });
   it("should have an index() method", () => {
     expect(user.index).toBeDefined();
   });
@@ -31,12 +34,12 @@ describe("UserModel tests", () => {
       email: "em@ail.com",
       password: "passwd",
     });
-    expect({ ...result, id: 1 }).toEqual({
+    expect({ ...result }).toEqual({
       first_name: "khalid",
       last_name: "hasan",
       email: "em@ail.com",
       password: "passwd",
-      id: 1,
+      id: result.id,
     });
     await user.delete("em@ail.com");
   });
