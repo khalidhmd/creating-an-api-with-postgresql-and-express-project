@@ -4,7 +4,7 @@ const product = new ProductModel();
 
 describe("ProductModel tests", () => {
   beforeAll(async () => {
-    product.clear();
+    await product.clear();
   });
   it("should have an index() method", () => {
     expect(product.index).toBeDefined();

@@ -5,8 +5,8 @@ const order = new OrderModel();
 
 describe("OrderModel tests", () => {
   beforeAll(async () => {
-    order.clear();
-    user.clear();
+    await order.clear();
+    await user.clear();
   });
   it("should have an index() method", () => {
     expect(order.index).toBeDefined();

@@ -4,7 +4,7 @@ const user = new UserModel();
 
 describe("UserModel tests", () => {
   beforeAll(async () => {
-    user.clear();
+    await user.clear();
   });
   it("should have an index() method", () => {
     expect(user.index).toBeDefined();

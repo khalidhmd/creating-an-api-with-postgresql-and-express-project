@@ -1,5 +1,5 @@
 import { Pool } from "pg";
-import db from "../db";
+import db from "../database";
 export type userType = {
   id?: number;
   first_name: string;
@@ -80,18 +80,14 @@ export class UserModel {
     }
   }
 
-  async clear(): Promise<userType> {
+  async clear(): Promise<void> {
     try {
       const sql = "DELETE FROM users;";
       const conn = await db.connect();
 
-      const result = await conn.query(sql);
-
-      const user = result.rows[0];
+      await conn.query(sql);
 
       conn.release();
-
-      return user;
     } catch (err) {
       throw new Error(`Could not clear user . Error: ${err}`);
     }

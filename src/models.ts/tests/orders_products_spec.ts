@@ -8,12 +8,12 @@ const order = new OrderModel();
 const order_product = new OrderProductModel();
 const user = new UserModel();
 
-describe("OrderModel tests", () => {
+describe("OrderProductModel tests", () => {
   beforeAll(async () => {
-    order.clear();
-    user.clear();
-    order_product.clear();
-    product.clear();
+    await order.clear();
+    await user.clear();
+    await order_product.clear();
+    await product.clear();
   });
   it("should have an index() method", () => {
     expect(order.index).toBeDefined();
@@ -60,7 +60,7 @@ describe("OrderModel tests", () => {
       order_id: o.id,
       product_id: p.id,
       quantity: 10,
-      id: 1,
+      id: result.id,
     });
 
     await user.delete("e@mail");

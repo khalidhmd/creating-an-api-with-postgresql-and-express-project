@@ -1,5 +1,5 @@
 import { Pool } from "pg";
-import db from "../db";
+import db from "../database";
 
 export type orderType = {
   id?: number | any;
@@ -77,18 +77,14 @@ export class OrderModel {
     }
   }
 
-  async clear(): Promise<orderType> {
+  async clear(): Promise<void> {
     try {
       const sql = "DELETE FROM orders;";
       const conn = await db.connect();
 
-      const result = await conn.query(sql);
-
-      const order = result.rows[0];
+      await conn.query(sql);
 
       conn.release();
-
-      return order;
     } catch (err) {
       throw new Error(`Could not clear order . Error: ${err}`);
     }
