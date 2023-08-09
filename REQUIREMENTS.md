@@ -18,7 +18,7 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 - Index route [token required]: 'api/users' [GET]
 - Show route [token required]: 'api/users/:id' [GET]
-- Create N[token required]: 'api/users' [POST]
+- Create [token required]: 'api/users' [POST]
 
 #### Orders
 

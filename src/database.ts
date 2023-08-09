@@ -1,8 +1,7 @@
-import dotenv from "dotenv";
-dotenv.config();
-
 import { Pool } from "pg";
 
+import dotenv from "dotenv";
+dotenv.config();
 const {
   POSTGRES_HOST,
   POSTGRES_DB,
@@ -15,16 +14,6 @@ const {
 } = process.env;
 
 let options;
-console.log("ENV", ENV);
-// // db default settings for dev environment
-if (ENV == "dev" || ENV == "development") {
-  options = {
-    host: POSTGRES_HOST,
-    database: POSTGRES_DB,
-    user: POSTGRES_USER,
-    password: POSTGRES_PASSWORD,
-  };
-}
 
 // // if environment set to test, change db settings accordingly
 if (ENV == "test") {
@@ -34,8 +23,17 @@ if (ENV == "test") {
     user: POSTGRES_USER_TEST,
     password: POSTGRES_PASSWORD_TEST,
   };
+} else {
+  // default db settings
+  options = {
+    host: POSTGRES_HOST,
+    database: POSTGRES_DB,
+    user: POSTGRES_USER,
+    password: POSTGRES_PASSWORD,
+  };
 }
 
+console.log(process.env);
 // const db = new Pool(options);
 
 // console.log("options", options);

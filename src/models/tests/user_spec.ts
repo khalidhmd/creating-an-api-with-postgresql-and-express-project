@@ -7,15 +7,15 @@ describe("UserModel tests", () => {
     await user.clear();
   });
   it("should have an index() method", () => {
-    expect(user.index).toBeDefined();
+    expect(UserModel.index).toBeDefined();
   });
 
   it("should have an show() method", () => {
-    expect(user.show).toBeDefined();
+    expect(UserModel.show).toBeDefined();
   });
 
   it("should have an create() method", () => {
-    expect(user.create).toBeDefined();
+    expect(UserModel.create).toBeDefined();
   });
 
   it("should have an delete() method", () => {
@@ -23,12 +23,12 @@ describe("UserModel tests", () => {
   });
 
   it("index method should return a list of users", async () => {
-    const res = await user.index();
+    const res = await UserModel.index();
 
     expect(res).toEqual([]);
   });
   it("should add a user", async () => {
-    const result = await user.create({
+    const result = await UserModel.create({
       first_name: "khalid",
       last_name: "hasan",
       email: "em@ail.com",

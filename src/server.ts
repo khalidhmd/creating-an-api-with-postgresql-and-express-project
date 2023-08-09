@@ -3,6 +3,10 @@ import bodyParser from "body-parser";
 
 import routes from "./routes";
 
+import dotenv from "dotenv";
+dotenv.config();
+console.log(process.env);
+
 const app: express.Application = express();
 
 app.use(bodyParser.json());

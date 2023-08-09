@@ -8,7 +8,7 @@ export type userType = {
 };
 
 export class UserModel {
-  async index(): Promise<userType[]> {
+  static async index(): Promise<userType[]> {
     try {
       const conn = await db.connect();
       const sql = "SELECT * FROM users;";
@@ -23,23 +23,23 @@ export class UserModel {
     }
   }
 
-  async show(email: string): Promise<userType> {
+  static async show(id: number): Promise<userType> {
     try {
-      const sql = "SELECT * FROM users WHERE email=($1);";
+      const sql = "SELECT * FROM users WHERE id=($1);";
 
       const conn = await db.connect();
 
-      const result = await conn.query(sql, [email]);
+      const result = await conn.query(sql, [id]);
 
       conn.release();
 
       return result.rows[0];
     } catch (err) {
-      throw new Error(`Could not find user ${email}. Error: ${err}`);
+      throw new Error(`Could not find user ${id}. Error: ${err}`);
     }
   }
 
-  async create(u: userType): Promise<userType> {
+  static async create(u: userType): Promise<userType> {
     try {
       const sql =
         "INSERT INTO users (first_name, last_name, password, email) VALUES($1, $2, $3, $4) RETURNING *;";
