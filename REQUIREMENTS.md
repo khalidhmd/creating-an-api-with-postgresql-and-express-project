@@ -6,23 +6,23 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 ## API Endpoints
 
-#### Products
+#### Products endpoints
 
-- Index
-- Show
-- Create [token required]
+- Index route: 'api/products' [GET]
+- Show route: 'api/products/:id' [GET]
+- Create route [token required]: 'api/products' [POST]
 - [OPTIONAL] Top 5 most popular products
 - [OPTIONAL] Products by category (args: product category)
 
 #### Users
 
-- Index [token required]
-- Show [token required]
-- Create N[token required]
+- Index route [token required]: 'api/users' [GET]
+- Show route [token required]: 'api/users/:id' [GET]
+- Create N[token required]: 'api/users' [POST]
 
 #### Orders
 
-- Current Order by user (args: user id)[token required]
+- Current Order by user (args: user id)[token required]: 'api/orders/:user_id' [GET]
 - [OPTIONAL] Completed Orders by user (args: user id)[token required]
 
 ## Data Schema Design

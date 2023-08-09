@@ -17,24 +17,19 @@ API_PORT=<port for express api server>
 
 The Postgres server will use the default port
 
-The api server port is set in the env variable PORT as above, or fail safe to 3000 as set in the server file script
+The api server port is set in the env variable API_PORT as above, or fail safe to 3000 as set in the server file script
 
-To install the packages run `npm install`
+## To use this project:
 
-You will need to install globally jasmine-ts and db-migrate
+- To install the packages run `npm install`
+- add `.env` file to the projet root directory that contains the above list of variables.
+- install Postgresql database server
+- create a database and put the database name in the `.env` file
+- You will need to install globally `jasmine-ts` and `db-migrate`
+- run `db-migrate up`
+- run any script from `package.json` file
 
-## Required Technologies
-
-Your application must make use of the following libraries:
-
-- Postgres for the database
-- Node/Express for the application logic
-- dotenv from npm for managing environment variables
-- db-migrate from npm for migrations
-- jsonwebtoken from npm for working with JWTs
-- jasmine from npm for testing
-
-## Steps to Completion
+### Note that the `test` script in the `package.json` is writen to run on `Ubuntu (linux)` OS. Please update it to set environment variable accoriding to your system OS.
 
 ### 1. Plan to Meet Requirements
 
