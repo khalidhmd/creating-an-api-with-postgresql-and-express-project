@@ -13,6 +13,9 @@ POSTGRES_USER_TEST=<database username for testing>
 POSTGRES_PASSWORD=<password for database user>
 POSTGRES_PASSWORD_TEST=<password for testing user>
 API_PORT=<port for express api server>
+ENV=dev
+SALT_ROUNDS=<number>
+BRYPT_PASSWORD=<password text>
 ```
 
 The Postgres server will use the default port

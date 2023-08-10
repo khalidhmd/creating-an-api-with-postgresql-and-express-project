@@ -1,4 +1,6 @@
+import bcrypt from "bcrypt";
 import db from "../database";
+
 export type userType = {
   id?: number;
   first_name: string;
@@ -44,11 +46,15 @@ export class UserModel {
       const sql =
         "INSERT INTO users (first_name, last_name, password, email) VALUES($1, $2, $3, $4) RETURNING *;";
       const conn = await db.connect();
+      const hash = bcrypt.hashSync(
+        u.password,
+        parseInt(process.env.SALT_ROUNDS || "")
+      );
 
       const result = await conn.query(sql, [
         u.first_name,
         u.last_name,
-        u.password,
+        hash,
         u.email,
       ]);
 

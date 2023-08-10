@@ -33,10 +33,5 @@ if (ENV == "test") {
   };
 }
 
-console.log(process.env);
-// const db = new Pool(options);
-
 // console.log("options", options);
 export default new Pool(options);
-
-// export default db;
