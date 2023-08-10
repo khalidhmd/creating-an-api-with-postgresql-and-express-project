@@ -2,6 +2,7 @@ import express from "express";
 import users from "./api/users";
 import products from "./api/products";
 import orders from "./api/orders";
+import auth from "./api/auth";
 
 const routes = express.Router();
 
@@ -18,5 +19,8 @@ routes.use("/products", products);
 
 //orders route
 routes.use("/orders", orders);
+
+//orders route
+routes.use("/auth", auth);
 
 export default routes;

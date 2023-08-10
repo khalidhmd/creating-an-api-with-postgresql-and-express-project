@@ -41,13 +41,41 @@ export class UserModel {
     }
   }
 
+  static async auth(email: string, password: string): Promise<any> {
+    try {
+      const sql = "SELECT * FROM users WHERE email=($1);";
+
+      const conn = await db.connect();
+
+      const result = await conn.query(sql, [email]);
+      console.log(result.rows);
+      conn.release();
+
+      if (result.rows.length) {
+        const user = result.rows[0];
+        if (
+          bcrypt.compareSync(
+            password + process.env.BRYPT_PASSWORD,
+            user.password
+          )
+        ) {
+          return user;
+        }
+      }
+
+      return null;
+    } catch (err) {
+      throw new Error(`Could not find user ${email}. Error: ${err}`);
+    }
+  }
+
   static async create(u: userType): Promise<userType> {
     try {
       const sql =
         "INSERT INTO users (first_name, last_name, password, email) VALUES($1, $2, $3, $4) RETURNING *;";
       const conn = await db.connect();
       const hash = bcrypt.hashSync(
-        u.password,
+        u.password + process.env.BRYPT_PASSWORD,
         parseInt(process.env.SALT_ROUNDS || "")
       );
 
