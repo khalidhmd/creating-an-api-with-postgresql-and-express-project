@@ -16,6 +16,7 @@ API_PORT=<port for express api server>
 ENV=dev
 SALT_ROUNDS=<number>
 BRYPT_PASSWORD=<password text>
+TOKEN_SECRET=<secret text>
 ```
 
 The Postgres server will use the default port

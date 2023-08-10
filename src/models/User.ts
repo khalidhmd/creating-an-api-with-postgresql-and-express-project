@@ -48,7 +48,7 @@ export class UserModel {
       const conn = await db.connect();
 
       const result = await conn.query(sql, [email]);
-      console.log(result.rows);
+      // console.log(result.rows);
       conn.release();
 
       if (result.rows.length) {
@@ -86,11 +86,11 @@ export class UserModel {
         u.email,
       ]);
 
-      const book = result.rows[0];
+      const newUser = result.rows[0];
 
       conn.release();
 
-      return book;
+      return newUser;
     } catch (err) {
       throw new Error(`Could not add new user ${u.email}. Error: ${err}`);
     }
