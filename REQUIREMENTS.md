@@ -10,19 +10,19 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 - Index route: 'api/products' [GET]
 - Show route: 'api/products/:id' [GET]
-- Create route [token required]: 'api/products' [POST]
+- Create route: 'api/products' [POST] [token required]
 - [OPTIONAL] Top 5 most popular products
 - [OPTIONAL] Products by category (args: product category)
 
 #### Users
 
-- Index route [token required]: 'api/users' [GET]
-- Show route [token required]: 'api/users/:id' [GET]
-- Create [token required]: 'api/users' [POST]
+- Index route: 'api/users' [GET] [token required]
+- Show route: 'api/users/:id' [GET] [token required]
+- Create: 'api/users' [POST] [token required]
 
 #### Orders
 
-- Current Order by user (args: user id)[token required]: 'api/orders/:user_id' [GET]
+- Current Order by user (args: user id): 'api/orders/:user_id' [GET] [token required]
 - [OPTIONAL] Completed Orders by user (args: user id)[token required]
 
 ## Data Schema Design

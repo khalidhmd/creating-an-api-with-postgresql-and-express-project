@@ -1,11 +1,12 @@
 import express from "express";
 import { UserModel } from "../../models/User";
 import jwt from "jsonwebtoken";
+import { verifyAuthToken } from "../../middleware/authMiddleware";
 
 const users = express.Router();
 
 //users route `index`
-users.get("/", async (req, res) => {
+users.get("/", verifyAuthToken, async (req, res) => {
   try {
     const user_list = await UserModel.index();
     res.json(user_list);
@@ -15,7 +16,7 @@ users.get("/", async (req, res) => {
 });
 
 //users route `show`
-users.get("/:id", async (req, res) => {
+users.get("/:id", verifyAuthToken, async (req, res) => {
   try {
     const user_id = parseInt(req.params["id"]);
     const user = await UserModel.show(user_id);
@@ -26,7 +27,7 @@ users.get("/:id", async (req, res) => {
 });
 
 //users route `create`
-users.post("/", async (req, res) => {
+users.post("/", verifyAuthToken, async (req, res) => {
   try {
     const u = req.body;
     const user = await UserModel.create(u);
