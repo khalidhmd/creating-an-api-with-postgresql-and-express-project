@@ -12,7 +12,7 @@ orders.get("/", async (req, res) => {
     );
 });
 
-//products for current user
+// list orders for current user
 orders.get("/:user_id", async (req, res) => {
   const id = req.params["user_id"];
   try {
@@ -20,18 +20,6 @@ orders.get("/:user_id", async (req, res) => {
     res.json(product_list);
   } catch (error: any) {
     // Catch clause variable type annotation must be 'any' or 'unknown' if specified.ts(1196)
-    res.status(500).json(error.message);
-  }
-});
-
-//products route `show`
-orders.get("/:id", async (req, res) => {
-  try {
-    const user_id = parseInt(req.params["id"]);
-    const user = await OrderModel.show(user_id);
-    res.json(user);
-  } catch (error: any) {
-    //Catch clause variable type annotation must be 'any' or 'unknown' if specified.ts(1196)
     res.status(500).json(error.message);
   }
 });

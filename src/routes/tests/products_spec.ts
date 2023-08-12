@@ -1,5 +1,5 @@
 import axios from "axios";
-import jwt from "jsonwebtoken";
+
 const base_url = "http://localhost:3000/api/products";
 
 import { productType, ProductModel } from "../../models/Product";

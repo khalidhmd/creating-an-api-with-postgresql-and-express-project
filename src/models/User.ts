@@ -43,13 +43,13 @@ export class UserModel {
 
   static async auth(email: string, password: string): Promise<userType | null> {
     try {
-      // const sql = "SELECT * FROM users WHERE email=($1);";
-      const sql = "SELECT * FROM users;";
+      const sql = "SELECT * FROM users WHERE email=($1);";
+      // const sql = "SELECT * FROM users;";
 
       const conn = await db.connect();
       console.log("auth", email, password);
-      const result = await conn.query(sql);
-      // const result = await conn.query(sql, [email]);
+      // const result = await conn.query(sql);
+      const result = await conn.query(sql, [email]);
       // console.log("result.row", result.rows);
 
       conn.release();
