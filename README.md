@@ -31,11 +31,11 @@ The api server port is set in the env variable API_PORT as above, or fail safe t
 - create a database and put the database name in the `.env` file as decribed above.
 - You will need to install globally `jasmine-ts`, `typescript`, and `db-migrate`.
 - run `db-migrate up`
-- run any script from `package.json` file
-- `npm run watch` to run the project with hot reload feature.
-- `npm run start` to run the transpiled js in dist folder.
-- `npm run test` to run the test suites.
-- `npm tsc` to transplile the project to js in dist folder.
+  - run any script from `package.json` file
+  - `npm run watch` to run the project with hot reload feature.
+  - `npm run start` to run the transpiled js in dist folder.
+  - `npm run test` to run the test suites.
+  - `npm tsc` to transplile the project to js in dist folder.
 
 ### Note that the `test` script in the `package.json` is writen to run on `Ubuntu (linux)` OS. Please update it to set environment variable accoriding to your system OS.
 
