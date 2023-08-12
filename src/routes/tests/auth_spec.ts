@@ -2,8 +2,7 @@ import axios from "axios";
 import jwt from "jsonwebtoken";
 const base_url = "http://localhost:3000/api/auth";
 
-import { userType, UserModel } from "../User";
-import { configDotenv } from "dotenv";
+import { userType, UserModel } from "../../models/User";
 
 describe("auth route tests", () => {
   it("should authenticate registered user", async () => {
