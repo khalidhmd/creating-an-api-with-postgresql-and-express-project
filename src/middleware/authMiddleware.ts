@@ -8,8 +8,11 @@ export function verifyAuthToken(
 ) {
   try {
     const authorizationHeader = req.headers.authorization;
-    console.log(authorizationHeader);
+    // console.log("authMiddleware: ", authorizationHeader);
+    // console.log("process.env.TOKEN_SECRET: ", process.env.TOKEN_SECRET);
+
     const token = authorizationHeader?.split(" ")[1];
+    // console.log("token: ", token);
     const decoded = jwt.verify(token + "", process.env.TOKEN_SECRET + "");
     next();
   } catch (error: any) {

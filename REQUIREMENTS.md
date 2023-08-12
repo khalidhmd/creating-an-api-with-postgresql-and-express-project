@@ -1,10 +1,20 @@
-# API Requirements
-
-The company stakeholders want to create an online storefront to showcase their great product ideas. Users need to be able to browse an index of all products, see the specifics of a single product, and add products to an order that they can view in a cart page. You have been tasked with building the API that will support this application, and your coworker is building the frontend.
-
-These are the notes from a meeting with the frontend developer that describe what endpoints the API needs to supply, as well as data shapes the frontend and backend have agreed meet the requirements of the application.
-
 ## API Endpoints
+
+#### Users
+
+- Index route: 'api/users' [GET]
+
+  - jwt token is required to ba passed in `Authorization` header with this format `Bearer <Token value>`
+  - response is a list of users
+
+- Show route: 'api/users/:id' [GET]
+  - jwt token is required to ba passed in `Authorization` header with this format `Bearer <Token value>`
+  - user id is required as route parameter
+  - response is a user object for user with supplied id
+- Create: 'api/users' [POST]
+  - jwt token is required to ba passed in `Authorization` header with this format `Bearer <Token value>`
+  - request body contains user data (email, password, first_name, last_name)
+  - response is a jwt of created newly user
 
 #### Products endpoints
 
@@ -13,12 +23,6 @@ These are the notes from a meeting with the frontend developer that describe wha
 - Create route: 'api/products' [POST] [token required]
 - [OPTIONAL] Top 5 most popular products
 - [OPTIONAL] Products by category (args: product category)
-
-#### Users
-
-- Index route: 'api/users' [GET] [token required]
-- Show route: 'api/users/:id' [GET] [token required]
-- Create: 'api/users' [POST] [token required]
 
 #### Orders
 
