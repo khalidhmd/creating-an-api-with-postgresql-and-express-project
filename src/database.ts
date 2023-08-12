@@ -33,5 +33,4 @@ if (ENV == "test") {
   };
 }
 
-// console.log("options", options);
 export default new Pool(options);

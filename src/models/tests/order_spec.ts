@@ -6,7 +6,6 @@ const order = new OrderModel();
 describe("OrderModel tests", () => {
   beforeAll(async () => {
     await OrderModel.clear();
-    await user.clear();
   });
   it("should have an index() method", () => {
     expect(OrderModel.index).toBeDefined();
@@ -28,7 +27,7 @@ describe("OrderModel tests", () => {
     const u = await UserModel.create({
       first_name: "fname",
       last_name: "lname",
-      email: "e@mail",
+      email: "e2@mail",
       password: "passwd",
     });
     const result = await OrderModel.create({
@@ -44,6 +43,6 @@ describe("OrderModel tests", () => {
     });
 
     await OrderModel.delete(1);
-    await user.delete("e@mail");
+    await UserModel.delete("e2@mail");
   });
 });

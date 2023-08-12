@@ -9,7 +9,7 @@ const user = new UserModel();
 describe("OrderProductModel tests", () => {
   beforeAll(async () => {
     await OrderModel.clear();
-    await user.clear();
+
     await order_product.clear();
     await ProductModel.clear();
   });
@@ -61,7 +61,7 @@ describe("OrderProductModel tests", () => {
       id: result.id,
     });
 
-    await user.delete("e@mail");
+    await UserModel.delete("e@mail");
 
     await ProductModel.delete(1);
     await order_product.delete(1);

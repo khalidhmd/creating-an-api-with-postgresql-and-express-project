@@ -1,12 +1,11 @@
 import { userType, UserModel } from "../User";
-// import dotenv from "dotenv";
-// dotenv.config();
+
 import bcrypt from "bcrypt";
 const user = new UserModel();
 
 describe("UserModel tests", () => {
   beforeAll(async () => {
-    await user.clear();
+    // await UserModel.clear();
   });
   it("should have an index() method", () => {
     expect(UserModel.index).toBeDefined();
@@ -21,7 +20,7 @@ describe("UserModel tests", () => {
   });
 
   it("should have an delete() method", () => {
-    expect(user.delete).toBeDefined();
+    expect(UserModel.delete).toBeDefined();
   });
 
   it("index method should return a list of users", async () => {
@@ -30,23 +29,19 @@ describe("UserModel tests", () => {
     expect(res).toEqual([]);
   });
   it("should add a user", async () => {
-    const hash = bcrypt.hashSync(
-      "passwd" + process.env.BRYPT_PASSWORD,
-      parseInt(process.env.SALT_ROUNDS || "")
-    );
     const result = await UserModel.create({
       first_name: "khalid",
       last_name: "hasan",
-      email: "em@ail.com",
+      email: "em1@ail.com",
       password: "passwd",
     });
     expect({ ...result }).toEqual({
       first_name: "khalid",
       last_name: "hasan",
-      email: "em@ail.com",
+      email: "em1@ail.com",
       password: result.password,
       id: result.id,
     });
-    await user.delete("em@ail.com");
+    await UserModel.delete("em1@ail.com");
   });
 });

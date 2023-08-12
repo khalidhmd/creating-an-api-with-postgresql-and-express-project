@@ -43,12 +43,15 @@ export class UserModel {
 
   static async auth(email: string, password: string): Promise<userType | null> {
     try {
-      const sql = "SELECT * FROM users WHERE email=($1);";
+      // const sql = "SELECT * FROM users WHERE email=($1);";
+      const sql = "SELECT * FROM users;";
 
       const conn = await db.connect();
+      console.log("auth", email, password);
+      const result = await conn.query(sql);
+      // const result = await conn.query(sql, [email]);
+      // console.log("result.row", result.rows);
 
-      const result = await conn.query(sql, [email]);
-      // console.log(result.rows);
       conn.release();
 
       if (result.rows.length) {
@@ -78,13 +81,13 @@ export class UserModel {
         u.password + process.env.BRYPT_PASSWORD,
         parseInt(process.env.SALT_ROUNDS || "")
       );
-
       const result = await conn.query(sql, [
         u.first_name,
         u.last_name,
         hash,
         u.email,
       ]);
+      // console.log("create", u.email, u.password);
 
       const newUser = result.rows[0];
 
@@ -96,7 +99,7 @@ export class UserModel {
     }
   }
 
-  async delete(email: string): Promise<userType> {
+  static async delete(email: string): Promise<userType> {
     try {
       const sql = "DELETE FROM users WHERE email=($1);";
       const conn = await db.connect();
@@ -113,7 +116,7 @@ export class UserModel {
     }
   }
 
-  async clear(): Promise<void> {
+  static async clear(): Promise<void> {
     try {
       const sql = "DELETE FROM users;";
       const conn = await db.connect();
