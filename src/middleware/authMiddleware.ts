@@ -16,6 +16,7 @@ export function verifyAuthToken(
     const decoded = jwt.verify(token + "", process.env.TOKEN_SECRET + "");
     next();
   } catch (error: any) {
+    // Catch clause variable type annotation must be 'any' or 'unknown' if specified.ts(1196)
     res.status(401).json(error.message);
   }
 }

@@ -20,7 +20,7 @@ describe("ProductModel tests", () => {
     expect(ProductModel.delete).toBeDefined();
   });
 
-  it("index method should return a list of product", async () => {
+  it("should return a list of product", async () => {
     const res = await ProductModel.index();
     expect(res).toEqual([]);
   });
@@ -37,6 +37,6 @@ describe("ProductModel tests", () => {
       id: result.id,
     });
 
-    await ProductModel.delete(1);
+    await ProductModel.clear();
   });
 });

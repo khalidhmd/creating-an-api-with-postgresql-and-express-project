@@ -3,20 +3,18 @@ import { ProductModel } from "../Product";
 import { OrderProductModel } from "../OrderProductModel";
 import { UserModel } from "../User";
 
-const product = new ProductModel();
-const order = new OrderModel();
 const order_product = new OrderProductModel();
 const user = new UserModel();
 
 describe("OrderProductModel tests", () => {
   beforeAll(async () => {
-    await order.clear();
+    await OrderModel.clear();
     await user.clear();
     await order_product.clear();
-    await product.clear();
+    await ProductModel.clear();
   });
   it("should have an index() method", () => {
-    expect(order.index).toBeDefined();
+    expect(OrderModel.index).toBeDefined();
   });
 
   it("index method should return a list of order_product", async () => {
@@ -32,41 +30,41 @@ describe("OrderProductModel tests", () => {
     expect(order_product.delete).toBeDefined();
   });
   it("should add an order_product", async () => {
-    const p = await product.create({
+    const p = await ProductModel.create({
       name: "product 1",
       price: 10,
       category: "category 1",
     });
 
-    const u = await user.create({
+    const u = await UserModel.create({
       first_name: "fname",
       last_name: "lname",
       email: "e@mail",
       password: "passwd",
     });
 
-    const o = await order.create({
+    const o = await OrderModel.create({
       order_date: new Date(),
       user_id: u.id || 1,
       status: true,
     });
-    console.log("order", o);
+
     const result = await order_product.create({
       order_id: o.id || 1,
       product_id: p.id || 1,
       quantity: 10,
     });
     expect(result).toEqual({
-      order_id: o.id,
-      product_id: p.id,
+      order_id: o.id || 1,
+      product_id: p.id || 1,
       quantity: 10,
       id: result.id,
     });
 
     await user.delete("e@mail");
 
-    await product.delete(1);
+    await ProductModel.delete(1);
     await order_product.delete(1);
-    await order.delete(1);
+    await OrderModel.delete(1);
   });
 });

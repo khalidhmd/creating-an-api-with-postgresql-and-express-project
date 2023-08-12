@@ -1,19 +1,19 @@
 import db from "../database";
 
 export type orderType = {
-  id?: number | any;
+  id?: number;
   order_date: Date;
   user_id: number;
   status: boolean;
 };
 
 export class OrderModel {
-  async index(): Promise<orderType[]> {
+  static async index(user_id: number): Promise<orderType[]> {
     try {
       const conn = await db.connect();
-      const sql = "SELECT * FROM orders;";
+      const sql = "SELECT * FROM orders WHERE user_id=($1);";
 
-      const result = await conn.query(sql);
+      const result = await conn.query(sql, [user_id]);
 
       conn.release();
 
@@ -23,7 +23,7 @@ export class OrderModel {
     }
   }
 
-  async show(id: number): Promise<orderType> {
+  static async show(id: number): Promise<orderType> {
     try {
       const sql = "SELECT * FROM orders WHERE id=($1);";
 
@@ -39,7 +39,7 @@ export class OrderModel {
     }
   }
 
-  async create(o: orderType): Promise<orderType> {
+  static async create(o: orderType): Promise<orderType> {
     try {
       const sql =
         "INSERT INTO orders (order_date, user_id, status) VALUES($1, $2, $3) RETURNING *;";
@@ -59,7 +59,7 @@ export class OrderModel {
     }
   }
 
-  async delete(id: number): Promise<orderType> {
+  static async delete(id: number): Promise<orderType> {
     try {
       const sql = "DELETE FROM orders WHERE id=($1);";
       const conn = await db.connect();
@@ -76,7 +76,7 @@ export class OrderModel {
     }
   }
 
-  async clear(): Promise<void> {
+  static async clear(): Promise<void> {
     try {
       const sql = "DELETE FROM orders;";
       const conn = await db.connect();

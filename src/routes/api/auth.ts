@@ -13,6 +13,7 @@ auth.post("/", async (req, res) => {
     const token = jwt.sign({ user }, process.env.TOKEN_SECRET + "");
     res.json(token);
   } catch (error: any) {
+    // Catch clause variable type annotation must be 'any' or 'unknown' if specified.ts(1196)
     res.status(500).json(error.message);
   }
 });

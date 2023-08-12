@@ -1,5 +1,7 @@
 import { userType, UserModel } from "../User";
-
+// import dotenv from "dotenv";
+// dotenv.config();
+import bcrypt from "bcrypt";
 const user = new UserModel();
 
 describe("UserModel tests", () => {
@@ -28,6 +30,10 @@ describe("UserModel tests", () => {
     expect(res).toEqual([]);
   });
   it("should add a user", async () => {
+    const hash = bcrypt.hashSync(
+      "passwd" + process.env.BRYPT_PASSWORD,
+      parseInt(process.env.SALT_ROUNDS || "")
+    );
     const result = await UserModel.create({
       first_name: "khalid",
       last_name: "hasan",
@@ -38,7 +44,7 @@ describe("UserModel tests", () => {
       first_name: "khalid",
       last_name: "hasan",
       email: "em@ail.com",
-      password: "passwd",
+      password: result.password,
       id: result.id,
     });
     await user.delete("em@ail.com");

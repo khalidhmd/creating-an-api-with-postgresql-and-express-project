@@ -41,7 +41,7 @@ export class UserModel {
     }
   }
 
-  static async auth(email: string, password: string): Promise<any> {
+  static async auth(email: string, password: string): Promise<userType | null> {
     try {
       const sql = "SELECT * FROM users WHERE email=($1);";
 

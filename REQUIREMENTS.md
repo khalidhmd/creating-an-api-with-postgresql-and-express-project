@@ -36,7 +36,10 @@
 
 #### Orders
 
-- Current Order by user (args: user id): 'api/orders/:user_id' [GET] [token required]
+- 'api/orders/:user_id' [GET]
+  - jwt token is required to be passed in `Authorization` header with this format `Bearer <Token value>`
+  - user id is required as route parameter
+  - response is a list of orders of the user with supplied id
 - [OPTIONAL] Completed Orders by user (args: user id)[token required]
 
 ## Data Schema Design
