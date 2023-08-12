@@ -1,10 +1,40 @@
 import express from "express";
+import { ProductModel } from "../../models/Product";
+import jwt from "jsonwebtoken";
+import { verifyAuthToken } from "../../middleware/authMiddleware";
 
 const products = express.Router();
 
-// serve original images (no processing) from images folder
+//products route `index`
 products.get("/", async (req, res) => {
-  res.send("Products route");
+  try {
+    const product_list = await ProductModel.index();
+    res.json(product_list);
+  } catch (error: any) {
+    res.status(500).json(error.message);
+  }
+});
+
+//products route `show`
+products.get("/:id", async (req, res) => {
+  try {
+    const user_id = parseInt(req.params["id"]);
+    const user = await ProductModel.show(user_id);
+    res.json(user);
+  } catch (error: any) {
+    res.status(500).json(error.message);
+  }
+});
+
+//products route `create`
+products.post("/", verifyAuthToken, async (req, res) => {
+  try {
+    const p = req.body;
+    const product = await ProductModel.create(p);
+    res.json(product);
+  } catch (error: any) {
+    res.status(500).json(error.message);
+  }
 });
 
 export default products;

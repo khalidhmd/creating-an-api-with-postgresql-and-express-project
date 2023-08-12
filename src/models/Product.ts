@@ -8,7 +8,7 @@ export type productType = {
 };
 
 export class ProductModel {
-  async index(): Promise<productType[]> {
+  static async index(): Promise<productType[]> {
     try {
       const conn = await db.connect();
       const sql = "SELECT * FROM products;";
@@ -23,7 +23,7 @@ export class ProductModel {
     }
   }
 
-  async show(id: number): Promise<productType> {
+  static async show(id: number): Promise<productType> {
     try {
       const sql = "SELECT * FROM products WHERE id=($1);";
 
@@ -39,7 +39,7 @@ export class ProductModel {
     }
   }
 
-  async create(p: productType): Promise<productType> {
+  static async create(p: productType): Promise<productType> {
     try {
       const sql =
         "INSERT INTO products (name, price, category) VALUES($1, $2, $3) RETURNING *;";
@@ -57,7 +57,7 @@ export class ProductModel {
     }
   }
 
-  async delete(id: number): Promise<productType> {
+  static async delete(id: number): Promise<productType> {
     try {
       const sql = "DELETE FROM products WHERE id=($1);";
       const conn = await db.connect();
@@ -74,7 +74,7 @@ export class ProductModel {
     }
   }
 
-  async clear(): Promise<void> {
+  static async clear(): Promise<void> {
     try {
       const sql = "DELETE FROM products";
       const conn = await db.connect();

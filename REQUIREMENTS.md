@@ -2,25 +2,35 @@
 
 #### Users
 
-- Index route: 'api/users' [GET]
+- 'api/users' [GET]
 
-  - jwt token is required to ba passed in `Authorization` header with this format `Bearer <Token value>`
+  - jwt token is required to be passed in `Authorization` header with this format `Bearer <Token value>`
   - response is a list of users
 
-- Show route: 'api/users/:id' [GET]
-  - jwt token is required to ba passed in `Authorization` header with this format `Bearer <Token value>`
+- 'api/users/:id' [GET]
+  - jwt token is required to be passed in `Authorization` header with this format `Bearer <Token value>`
   - user id is required as route parameter
   - response is a user object for user with supplied id
-- Create: 'api/users' [POST]
-  - jwt token is required to ba passed in `Authorization` header with this format `Bearer <Token value>`
+- 'api/users' [POST]
+  - jwt token is required to be passed in `Authorization` header with this format `Bearer <Token value>`
   - request body contains user data (email, password, first_name, last_name)
-  - response is a jwt of created newly user
+  - response is a jwt of newly created user
 
 #### Products endpoints
 
-- Index route: 'api/products' [GET]
-- Show route: 'api/products/:id' [GET]
-- Create route: 'api/products' [POST] [token required]
+- 'api/products' [GET]
+
+  - response is a list of products
+
+- 'api/products/:id' [GET]
+
+  - product id is required as route parameter
+  - response is products object for product with supplied id
+
+- Create route: 'api/products' [POST]
+  - jwt token is required to be passed in `Authorization` header with this format `Bearer <Token value>`
+  - request body contains user data (email, password, first_name, last_name)
+  - response is an object of newly created product
 - [OPTIONAL] Top 5 most popular products
 - [OPTIONAL] Products by category (args: product category)
 
