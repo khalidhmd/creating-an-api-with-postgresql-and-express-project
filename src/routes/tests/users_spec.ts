@@ -15,21 +15,12 @@ describe("users route tests", () => {
     });
   });
   it("should create user ", async () => {
-    const res = await axios.post(
-      base_url,
-      {
-        first_name: "khalid",
-        last_name: "hasan",
-        email: "auth@email.com",
-        password: "passwd1",
-      },
-      {
-        headers: {
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo1LCJmaXJzdF9uYW1lIjoia2hhbGlkNSIsImxhc3RfbmFtZSI6Imhhc2FuNSIsInBhc3N3b3JkIjoiJDJiJDEwJHh0Q1gyNE9JSEVEbkJxZFFjRXFLaC5qUjBmMEtSUHlWeVl0Zi5IeWRPcUE1LlM2LnhyajE2IiwiZW1haWwiOiJlbUBhaWwuY29tNSJ9LCJpYXQiOjE2OTE4NjE5ODF9.URgtqFT1zw9ojq_0snq31S1F1dLnAgX3_3gan8DotFM",
-        },
-      }
-    );
+    const res = await axios.post(base_url, {
+      first_name: "khalid",
+      last_name: "hasan",
+      email: "auth@email.com",
+      password: "passwd1",
+    });
 
     const data = res.data;
     jwt.verify(data, process.env.TOKEN_SECRET + "");

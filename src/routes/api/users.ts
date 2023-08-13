@@ -29,7 +29,7 @@ users.get("/:id", verifyAuthToken, async (req, res) => {
 });
 
 //users route `create`
-users.post("/", verifyAuthToken, async (req, res) => {
+users.post("/", async (req, res) => {
   try {
     const u = req.body;
     const user = await UserModel.create(u);
