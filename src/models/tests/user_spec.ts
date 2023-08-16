@@ -42,6 +42,20 @@ describe("UserModel tests", () => {
       password: result.password,
       id: result.id,
     });
-    await UserModel.delete("em1@ail.com");
+    // await UserModel.delete("em1@ail.com");
+  });
+  it("should show a product", async () => {
+    const result = await UserModel.create({
+      first_name: "khalid",
+      last_name: "hasan",
+      email: "em1@ail.com",
+      password: "passwd",
+    });
+    const user = await UserModel.show(result.id || 1);
+    expect({ ...user }).toEqual({ ...result });
+  });
+
+  afterAll(async () => {
+    await UserModel.clear();
   });
 });

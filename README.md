@@ -19,7 +19,7 @@ BRYPT_PASSWORD=<password text>
 TOKEN_SECRET=<secret text>
 ```
 
-The Postgres server will use the default port
+The Postgres server will use the default port: 5432
 
 The api server port is set in the env variable API_PORT as above, or fail safe to 3000 as set in the server file script
 
@@ -38,5 +38,3 @@ The api server port is set in the env variable API_PORT as above, or fail safe t
   - `npm tsc` to transplile the project to js in dist folder.
 
 ### Note that the `test` script in the `package.json` is writen to run on `Ubuntu (linux)` OS. Please update it to set environment variable accoriding to your system OS.
-
-"test": "export ENV=test && db-migrate up --env test && jasmine-ts && db-migrate reset --env test",

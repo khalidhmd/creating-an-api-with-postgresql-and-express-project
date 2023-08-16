@@ -13,7 +13,7 @@ orders.get("/", async (req, res) => {
 });
 
 // list orders for current user
-orders.get("/:user_id", async (req, res) => {
+orders.get("/:user_id", verifyAuthToken, async (req, res) => {
   const id = req.params["user_id"];
   try {
     const product_list = await OrderModel.index(parseInt(id));
